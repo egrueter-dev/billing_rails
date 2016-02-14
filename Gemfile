@@ -27,7 +27,11 @@ gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+gem 'stripe-rails'
+
+
 gem 'devise', :github => 'plataformatec/devise', :branch => 'master' 
+gem 'pry'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
