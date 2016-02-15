@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   }
 
   namespace 'dashboard' do
-    resources :profile, only: [:edit, :update, :show]
+    resources :profiles, only: [:edit, :update, :show]
   end
 
   root to: 'welcome#index'
