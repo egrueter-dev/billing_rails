@@ -1,16 +1,37 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-# before_action :configure_sign_up_params, only: [:create]
-# before_action :configure_account_update_params, only: [:update]
+  # before_action :configure_sign_up_params, only: [:create]
+  # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-   def new
-      super
-   end
+  def new
+    super
+  end
 
   # POST /resource
-   def create
+  def create
     super
-   end
+
+    # Todo:
+    # Valid email validations
+    # Only create user account if above account is created.
+    # Erik's API Key - Put this in Figaro
+    # Add strong params to this controller
+
+    Stripe.api_key = 'sk_test_PTVRgvgpatfQZVMkHSVlTqLs'
+
+    res = Stripe::Account.create(
+      {
+        :country => "US",
+        :managed => true,
+        :email => params[:user][:email]
+      }
+    )
+
+    u = User.where(email: params[:user][:email])
+    u.first.publishable_key = res[:keys][:secret]
+    u.first.secret_key = res[:keys][:publishable]
+    u.first.save
+  end
 
   # GET /resource/edit
   # def edit
