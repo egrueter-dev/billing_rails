@@ -5,6 +5,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
+  namespace 'dashboard' do
+    resources :profile, only: [:edit, :update, :show]
+  end
+
   root to: 'welcome#index'
 
   # Serve websocket cable requests in-process
