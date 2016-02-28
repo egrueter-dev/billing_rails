@@ -5,26 +5,26 @@ class Dashboard::ProfilesController < ApplicationController
 
   def edit
     # Update bank account You need to retreive an existing account here. If none created,
-    # Then create a new external account
-
+    # ..then create a new external account
+    #
     # Move this to Figaro
     Stripe.api_key = "sk_test_PTVRgvgpatfQZVMkHSVlTqLs"
 
     binding.pry
 
-    account = Stripe::Account.retrieve("acct_157VxdKuRisrmOjU")
+    account = Stripe::Account.retrieve(current_user.account_id)
 
-    begin
+    ## Might need to rip this out?? Too tired right now to code this properly
 
-    rescue # external account not found
-      account.external_accounts.create(:external_account => "btok_7udS4m3NKxUHgT")
+    if user["bank_accounts"]["total_count"] == 0
+      account.external_accounts.create(:external_account => SecureRandom.base58(24))
     end
 
-    # Update First, Last Name
-    # Add company logo? -- later
+    ## Else find the first bank account on the list and update that?
   end
 
   def update
-
+    # Update First, Last Name
+    # Add company logo? -- later
   end
 end

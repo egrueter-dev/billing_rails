@@ -30,7 +30,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     u = User.where(email: params[:user][:email])
     u.first.publishable_key = res[:keys][:secret]
     u.first.secret_key = res[:keys][:publishable]
+    u.first.account_id = res[:id]
     u.first.save
+
   end
 
   # GET /resource/edit
