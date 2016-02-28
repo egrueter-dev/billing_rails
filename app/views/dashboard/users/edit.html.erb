@@ -1,0 +1,17 @@
+<p> This is profiles/edit.html.erb profiles#edit </p>
+
+<%= form_for @user, url: dashboard_user_path(@user) do |f| %>
+  <%= f.label :email %>
+  <%= f.text_field :email %><br />
+
+  <p> Bank account information </p>
+  <p> US Residents only...</p>
+
+  <%= label_tag :account_number %>:
+  <%= text_field_tag :account_number %><br />
+
+  <%= label_tag :routing_number %>:
+  <%= text_field_tag :routing_number %><br />
+
+  <%= f.submit %>
+<% end %>
