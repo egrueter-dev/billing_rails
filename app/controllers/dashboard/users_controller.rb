@@ -7,7 +7,7 @@ class Dashboard::UsersController < ApplicationController
     # Update bank account You need to retreive an existing account here. If none created,
     # ..then create a new external account with a POST to update.
     # Move this to Figaro or initializer
-    Stripe.api_key = "sk_test_PTVRgvgpatfQZVMkHSVlTqLs"
+    Stripe.api_key = ""
 
     @user = User.where(id: current_user.id).first
 
